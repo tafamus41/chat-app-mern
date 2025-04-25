@@ -1,13 +1,23 @@
+import { Navigate, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import SignUp from "./pages/signup/SignUp";
+import { Toaster } from "react-hot-toast";
+import { useAuthContext } from "./context/AuthContext";
+
 function App() {
-  return (
-    <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 ">
-        <h1 className="text-3xl font-semibold text-center text-gray-300">
-          Login
-        </h1>
-      </div>
-    </div>
-  );
+	const { authUser } = useAuthContext();
+	return (
+		<div className='p-4 h-screen flex items-center justify-center'>
+			<Routes>
+				<Route path='/' element={authUser ? <Home /> : <Navigate to={"/login"} />} />
+				<Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />
+				<Route path='/signup' element={authUser ? <Navigate to='/' /> : <SignUp />} />
+			</Routes>
+			<Toaster />
+		</div>
+	);
 }
 
 export default App;
