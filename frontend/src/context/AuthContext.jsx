@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuthContext = () => {
@@ -12,5 +12,3 @@ export const AuthContextProvider = ({ children }) => {
 
 	return <AuthContext.Provider value={{ authUser, setAuthUser }}>{children}</AuthContext.Provider>;
 };
-
-export default AuthContext;
